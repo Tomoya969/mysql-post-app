@@ -1,0 +1,22 @@
+# version: '3'
+services:
+  mysql:
+    image: 'mysql:8.0'
+    platform: linux/amd64
+    container_name: mysql8-post-app
+    ports:
+        - '3307:3306'
+    environment:
+        MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        TZ: 'Asia/Tokyo'
+    volumes:
+      - './my.cnf:/etc/mysql/conf.d/my.cnf'
+    restart: always
+    networks:
+        - post-app
+volumes:
+  db-data-2:
+
+networks:
+    post-app:
+        external: true
